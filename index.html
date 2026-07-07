@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsyie Basyir ❤️</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+
+    <style>
+        *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+        }
+
+        body{
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:#111;
+        overflow:hidden;
+        }
+
+        .phone{
+        width:min(360px, 95vw);
+        height:min(740px, 96vh);
+
+        aspect-ratio:360 / 740;
+
+        border-radius:clamp(38px, 6vw, 58px);
+        background:linear-gradient(145deg,#c8b0ff,#9b6dff,#7b3fe4);
+        padding:8px;
+        position:relative;
+        overflow:hidden;
+
+        box-shadow:
+            0 30px 80px rgba(0,0,0,.55),
+            0 0 0 2px rgba(255,255,255,.15) inset;
+        }
+
+        .phone::before{
+        content:"";
+        position:absolute;
+        top:8px;
+        left:8px;
+        right:8px;
+        bottom:8px;
+        border-radius:50px;
+        background:url("https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=1200&q=80") center/cover;
+        z-index:0;
+        }
+
+        .phone::after{
+        content:"";
+        position:absolute;
+        top:8px;
+        left:8px;
+        right:8px;
+        bottom:8px;
+        border-radius:50px;
+        background:linear-gradient(
+        180deg,
+        rgba(110,60,255,.18),
+        rgba(180,130,255,.08)
+        );
+        pointer-events:none;
+        z-index:1;
+        }
+
+        .dynamic-island{
+        position:absolute;
+        top:18px;
+        left:50%;
+        transform:translateX(-50%);
+        width:125px;
+        height:34px;
+        background:#000;
+        border-radius:30px;
+        z-index:20;
+        box-shadow:0 0 10px rgba(0,0,0,.5);
+        }
+
+        .home-bar{
+        position:absolute;
+        bottom:15px;
+        left:50%;
+        transform:translateX(-50%);
+        width:140px;
+        height:5px;
+        background:white;
+        border-radius:10px;
+        opacity:.85;
+        z-index:20;
+        }
+ 
+        .home-screen{
+        height:100%;
+        background:url("kuromi.jpeg") center center/cover no-repeat;
+        border-radius:40px;
+        position:relative;
+        color:white;
+        }
+
+        .home-time{
+        text-align:center;
+        font-size:22px;
+        padding-top:40px;
+        font-weight:bold;
+        }
+
+        .apps{
+        display:flex;
+        justify-content:center;
+        margin-top:90px;
+        }
+
+        .app{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        cursor:pointer;
+        }
+
+        .app img{
+        width:70px;
+        height:70px;
+        }
+
+        .app span{
+        margin-top:8px;
+        font-size:15px;
+        color:white;
+        }
+
+        .wa-header{
+        background:#128C7E;
+        color:white;
+        padding:18px;
+        font-size:22px;
+        font-weight:bold;
+        text-align:center;
+        }
+
+        .chat-list{
+        padding:20px;
+        }
+
+        .chat{
+        display:flex;
+        align-items:center;
+        gap:15px;
+        padding:15px;
+        border-bottom:1px solid #ddd;
+        cursor:pointer;
+        }
+
+        .chat img{
+        width:55px;
+        height:55px;
+        border-radius:50%;
+        }
+
+        .bubble{
+        margin:30px;
+        background:#DCF8C6;
+        padding:20px;
+        border-radius:20px;
+        font-size:20px;
+        line-height:1.8;
+        text-align:left;
+        }
+
+        .overlay{
+        position:absolute;
+        inset:8px;
+        border-radius:50px;
+        background:rgba(35,18,70,.28);
+        backdrop-filter:blur(18px);
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        padding-top:90px;
+        color:white;
+        z-index:10;
+        }
+
+        .time{
+        font-size:clamp(56px,15vw,76px);
+        font-weight:200;
+        letter-spacing:-2px;
+        }
+
+        .date{
+        font-size:clamp(16px,4.5vw,20px);
+        margin-bottom:50px;
+        }
+
+        .status{
+        margin-top:18px;
+        color:#ffd6ff;
+        font-size:16px;
+        } 
+
+        .dots{
+        display:flex;
+        gap:12px;
+        margin-bottom:30px;
+        }
+
+        .dot{
+        width:14px;
+        height:14px;
+        border:2px solid white;
+        border-radius:50%;
+        }
+
+        .dot.fill{
+        background:white;
+        }
+
+        .keypad{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:16px;
+        width:85%;
+        justify-items:center;
+        }
+
+        .notification{
+        position:absolute;
+        top:-120px;
+        left:50%;
+        transform:translateX(-50%);
+        width:90%;
+        background:rgba(255,255,255,.95);
+        backdrop-filter:blur(20px);
+        border-radius:18px;
+        padding:14px;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        z-index:100;
+        cursor:pointer;
+        box-shadow:0 10px 30px rgba(0,0,0,.25);
+        transition:top .6s ease;
+        }
+
+        .notification.show{
+        top:55px;
+        }
+
+        .notification img{
+        width:45px;
+        height:45px;
+        }
+
+        .notification-text{
+        color:#111;
+        font-size:14px;
+        line-height:1.4;
+        }
+
+        .notification-text strong{
+        font-size:15px;
+        }
+
+        .btn{
+        width:min(76px,18vw);
+        height:min(76px,18vw);
+
+        border-radius:50%;
+        border:none;
+        font-size:clamp(24px,6vw,30px);
+        color:white;
+        cursor:pointer;
+
+        background:rgba(170,120,255,.28);
+        backdrop-filter:blur(20px);
+
+        box-shadow:
+            0 5px 15px rgba(0,0,0,.25),
+            inset 0 1px rgba(255,255,255,.2);
+
+        transition:.2s;
+        }
+
+        .btn:hover{
+        background:rgba(190,145,255,.45);
+        transform:scale(1.05);
+        }
+
+        .message{
+            display:none;
+            position:absolute;
+            inset:8px;
+            border-radius:50px;
+            background:linear-gradient(
+                180deg,
+                #faf6ff,
+                #efe5ff
+            );
+            padding:40px;
+            overflow:auto;
+            text-align:center;
+            animation:fade .6s;
+
+            z-index:5;    
+        }
+
+        .message h1{
+        margin-top:80px;
+        font-size:clamp(28px,8vw,40px);
+        }
+
+        .message p{
+        font-size:clamp(17px,4.5vw,22px);
+        line-height:1.8;
+        }
+
+        .heart{
+        font-size:65px;
+        animation:beat 1s infinite;
+        }
+
+        @keyframes beat{
+        50%{transform:scale(1.2);}
+        }
+
+        @keyframes fade{
+        from{opacity:0;}
+        to{opacity:1;}
+        }
+
+        @media (max-width:480px){
+
+            body{
+            padding:10px;
+            }
+
+            .overlay{
+            padding-top:70px;
+            }
+
+            .keypad{
+            width:90%;
+            gap:14px;
+            }
+
+            .status{
+            font-size:14px;
+            }
+
+            .message{
+            padding:25px;
+            }
+
+            .home-bar{
+            width:120px;
+            }
+
+            .dynamic-island{
+            width:110px;
+            height:30px;
+            }
+
+        }
+ 
+    </style>
+
+</head>
+<body>
+
+    <div class="phone">
+
+        <div class="dynamic-island"></div>
+        <div class="home-bar"></div>
+
+        <div class="notification" id="notification">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            <div class="notification-text">
+                <small style="color:#777;">WhatsApp • now</small><br>
+                <strong>Ain Nafisah ❤️</strong><br>
+                <span>I sebenarnya 👉🏼👈🏼 🥺</span>
+            </div>
+        </div>
+
+        <div class="overlay" id="lock">
+
+            <div class="time" id="lockTime">10:01</div>
+            <div class="date" id="lockDate">Tap the numbers ❤️</div>
+
+            <div class="dots" id="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="keypad">
+                <button class="btn">1</button>
+                <button class="btn">2</button>
+                <button class="btn">3</button>
+
+                <button class="btn">4</button>
+                <button class="btn">5</button>
+                <button class="btn">6</button>
+
+                <button class="btn">7</button>
+                <button class="btn">8</button>
+                <button class="btn">9</button>
+
+                <button class="btn">.</button>
+                <button class="btn">0</button>
+                <button class="btn">⌫</button>
+            </div>
+
+            <div class="status" id="status"></div>
+
+        </div>
+
+        <div class="message" id="message">
+
+            <div class="home-screen">
+
+                <div class="home-time" id="homeTime">10:01</div>
+
+                <div class="apps">
+
+                    <div class="app" id="openWhatsapp">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+                        <span>WhatsApp</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+ 
+    </div>
+
+        <script>
+            let input = "";
+            const correct = "10.01";
+
+            const dots = document.querySelectorAll(".dot");
+            const status = document.getElementById("status");
+
+            function updateDots() {
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle("fill", i < input.length);
+                });
+            }
+
+            // =========================
+            // Passcode keypad
+            // =========================
+            document.querySelectorAll(".btn").forEach(btn => {
+
+                btn.addEventListener("click", () => {
+
+                    const val = btn.innerText;
+
+                    // Backspace
+                    if (val === "⌫") {
+                        input = input.slice(0, -1);
+                        updateDots();
+                        return;
+                    }
+
+                    if (input.length >= 5) return;
+
+                    input += val;
+                    updateDots();
+
+                    if (input.length === 5) {
+
+                        if (input === correct) {
+
+                            status.innerHTML = "YAYYY HEHE";
+
+                            setTimeout(() => {
+
+                                // Hide lock screen
+                                document.getElementById("lock").style.display = "none";
+
+                                // Show home screen
+                                document.getElementById("message").style.display = "block";
+
+                                // Show notification after 0.8s
+                                setTimeout(() => {
+                                    document.getElementById("notification").classList.add("show");
+                                }, 800);
+
+                            }, 500);
+
+                        } else {
+
+                            status.innerHTML = "Wrong passcode";
+
+                            setTimeout(() => {
+                                input = "";
+                                status.innerHTML = "";
+                                updateDots();
+                            }, 800);
+
+                        }
+
+                    }
+
+                });
+
+            });
+
+            // =========================
+            // Malaysia Real Time (GMT+8)
+            // =========================
+            function updateMalaysiaTime() {
+
+                const now = new Date();
+
+                const time = new Intl.DateTimeFormat("en-GB", {
+                    timeZone: "Asia/Kuala_Lumpur",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                }).format(now);
+
+                const date = new Intl.DateTimeFormat("en-GB", {
+                    timeZone: "Asia/Kuala_Lumpur",
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long"
+                }).format(now);
+
+                document.getElementById("lockTime").textContent = time;
+                document.getElementById("lockDate").textContent = date;
+
+                const homeTime = document.getElementById("homeTime");
+                if (homeTime) {
+                    homeTime.textContent = time;
+                }
+            }
+
+            updateMalaysiaTime();
+            setInterval(updateMalaysiaTime, 1000);
+
+            // =========================
+            // WhatsApp
+            // =========================
+            const whatsappURL =
+                "https://wa.me/601169112711?text=" +
+                encodeURIComponent("I sebenarnya spidergirl hehe ❤️🤭");
+
+            // Open from home screen icon
+            const openWhatsapp = document.getElementById("openWhatsapp");
+
+            if (openWhatsapp) {
+                openWhatsapp.addEventListener("click", () => {
+                    window.open(whatsappURL, "_blank");
+                });
+            }
+
+            // Open from notification
+            const notification = document.getElementById("notification");
+
+            if (notification) {
+                notification.addEventListener("click", () => {
+                    notification.classList.remove("show");
+                    window.open(whatsappURL, "_blank");
+                });
+            }
+        </script>
+
+    </body>
+</html>
